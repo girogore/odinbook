@@ -1,0 +1,31 @@
+<%= form_for @profile do |f| %>
+  <div class="table-maker">
+    <div class="row">
+      <div>
+        <h4> Old Image: </h4>
+      </div>
+      <div>
+        <h4> NewImage: </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <%= image_tag @profile.profile_photo, class: "profilePicture"%>
+      </div>
+      <div>
+        <%= image_tag @profile.profile_photo, class: "imagePreview" %>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :image %>
+    </div>
+    <div>
+      <%= f.file_field :image, class: "imageInput"%>
+    </div>
+  </div>
+  <%= f.submit "Update Profile Image"%>
+<% end %>
+
+<script type="text/javascript" src="/javascript/lib/image_preview.js"></script>

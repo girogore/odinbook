@@ -1,0 +1,14 @@
+<h1> <%= "#{@profile.email}'s Profile" %> </h1>
+<div class="col">
+  <%= image_tag @profile.profile_photo %>
+  <%= image_tag @profile.profile_photo_tiny %>
+</div>
+<div>
+  <h2> Stats </h2>
+    <div class="stats">
+      <h3> # Of people you are following :: <%= "#{@profile.followed_users.length}"%> </h3>
+      <h3> # Of posts you've made :: <%= "#{@profile.followed_users.length}"%> </h3>
+      <h3> # Of comments you've made :: <%= "#{@profile.comments.length}"%> </h3>
+    </div>
+</div>
+<%= button_to "Edit Picture", "/profiles/#{@profile.id}/edit", method: :get %>

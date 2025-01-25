@@ -65,3 +65,9 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "shrine", "~> 3.6"
+gem "image_processing", "~> 1.12", ">= 1.12.1"
+gem "fastimage"
+gem "rmagick"
+gem "mime-types"

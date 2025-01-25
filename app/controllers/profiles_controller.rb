@@ -1,0 +1,61 @@
+class ProfilesController < ApplicationController
+  before_action :verify_user, only: %i[ show edit update ]
+
+  # GET /profiles/new
+  def new
+    @profile = Profile.new
+  end
+
+  # GET /profiles/1
+  def show
+  end
+
+  # GET /profiles/1/edit
+  def edit
+  end
+
+  # POST /profiles
+  def create
+    @profile = Profile.new(profile_param)
+    if @profile.save
+      redirect_to @profile, notice: "Profile was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /profiles/1
+  def update
+    if params[:profile].nil?
+      redirect_to @profile, notice: "No changes performed."
+    else
+      if @profile.update(profile_param)
+        @profile.image_derivatives!
+        redirect_to @profile, notice: "Profile was successfully updated."
+      else
+        Shrine.plugin :remove_invalid
+        flash.now[:alert] = "Image wrong type or too big"
+        render :edit, status: :unprocessable_entity
+      end
+    end
+  end
+
+  private
+
+  def profile_param
+    params.require(:profile).permit(:image)
+  end
+
+  def verify_user
+    current_profile = Profile.find(params.expect(:id))
+    if user_signed_in?
+      if current_user.id == current_profile.user_id
+        @profile = current_profile
+      else
+        redirect_to "/profiles/#{current_user.profile.id}"
+      end
+    else
+      redirect_to root
+    end
+  end
+end

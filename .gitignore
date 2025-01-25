@@ -37,3 +37,7 @@
 !/app/assets/builds/.keep
 
 /node_modules
+public/images/*
+public/uploads/*
+!/public/uploads/default-405x575.jpg
+!/public/uploads/default.json

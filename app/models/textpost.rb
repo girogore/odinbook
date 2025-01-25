@@ -1,0 +1,2 @@
+class Textpost < Post
+end

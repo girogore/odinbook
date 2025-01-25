@@ -99,6 +99,7 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
+    content_disposition (1.0.0)
     crass (1.0.6)
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
@@ -113,11 +114,22 @@ GEM
       responders
       warden (~> 1.2.3)
     dotenv (3.1.7)
+    down (5.4.2)
+      addressable (~> 2.8)
     drb (2.2.1)
     ed25519 (1.3.0)
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    fastimage (2.4.0)
+    ffi (1.17.1-aarch64-linux-gnu)
+    ffi (1.17.1-aarch64-linux-musl)
+    ffi (1.17.1-arm-linux-gnu)
+    ffi (1.17.1-arm-linux-musl)
+    ffi (1.17.1-arm64-darwin)
+    ffi (1.17.1-x86_64-darwin)
+    ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.17.1-x86_64-linux-musl)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -125,6 +137,9 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    image_processing (1.13.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -161,6 +176,11 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
+    mime-types (3.6.0)
+      logger
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2025.0107)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.4)
     msgpack (1.7.5)
@@ -195,6 +215,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.2-x86_64-linux-musl)
       racc (~> 1.4)
+    observer (0.1.2)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
     parallel (1.26.3)
@@ -202,6 +223,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    pkg-config (1.5.9)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -266,6 +288,9 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.4.0)
+    rmagick (6.1.0)
+      observer (~> 0.1)
+      pkg-config (~> 1.4)
     rubocop (1.70.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -295,6 +320,9 @@ GEM
       rubocop-performance
       rubocop-rails
     ruby-progressbar (1.13.0)
+    ruby-vips (2.2.2)
+      ffi (~> 1.12)
+      logger
     rubyzip (2.4.1)
     securerandom (0.4.1)
     selenium-webdriver (4.28.0)
@@ -303,6 +331,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shrine (3.6.0)
+      content_disposition (~> 1.0)
+      down (~> 5.1)
     solid_cable (3.0.5)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -380,15 +411,20 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.9)
+  fastimage
+  image_processing (~> 1.12, >= 1.12.1)
   importmap-rails
   jbuilder
   kamal
+  mime-types
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.1)
+  rmagick
   rubocop-rails-omakase
   selenium-webdriver
+  shrine (~> 3.6)
   solid_cable
   solid_cache
   solid_queue
