@@ -1,0 +1,8 @@
+<!-- # "requested, approved, rejected" -->
+<%= form_with url: "/followings", scope: :following, as: :following do |f| %>
+  <%= f.hidden_field :status, value: "requested", id: nil %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :followed_users_id, value: user.id %>
+  <%= f.submit "Follow" %>
+<% end %>
+

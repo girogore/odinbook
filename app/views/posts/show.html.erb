@@ -1,0 +1,7 @@
+<%= render @post %>
+
+<div>
+  <% if current_user.id == @post.user.id %>
+    <%= button_to "Destroy this post", @post, method: :delete %>
+  <% end %>
+</div>

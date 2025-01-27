@@ -9,26 +9,228 @@
  * Consider organizing styles into separate files for maintainability.
  */
  
- .table-maker {
+.col {
   display: flex;
   flex-direction: column;
 }
 
 .row {
   display: flex;
+}
+
+.center {
+  margin-left: 10px;
+}
+
+.g2 {
+  gap: 2px;
+}
+
+.g5 {
+  gap: 5px;
+}
+
+.g10 {
+  gap: 10px;
+}
+
+.g20 {
   gap: 20px;
 }
 
-.row div {
+.g40 {
+  gap: 40px;
+}
+
+.p20 {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.w240f{
   flex: 0 0 240px;
 }
 
-.profilePicture {
+.w40f{
+  flex: 0 0 40px;
+}
+
+.w64f{
+  flex: 0 0 64px;
+}
+
+.w80f {
+  flex: 0 0 80px;
+}
+
+.w100max{
+  width: 100px;
+  max-width: 100px;
+  overflow-wrap: anywhere;
+}
+
+.w120f {
+  flex: 0 0 120px;
+}
+
+.w60p {
+  flex: 0 0 60%;
+}
+
+.w85p {
+  flex: 0 0 85%;
+}
+
+.h25 {
+  height: 25px;
+  overflow: hidden;
+}
+
+.h50 {
+  height: 50px;
+}
+
+.h70 {
+  height: 70px;
+}
+
+.h80 {
+  height: 80px;
+}
+
+.h100 {
+  height: 100px;
+}
+
+.h300 {
   height: 300px;
-  width: 240px;
+}
+
+.h300m {
+  height: auto;
+  max-height: 300px;
+}
+
+.hmin50 {
+  height: auto;
+  min-height: 50px;
+}
+
+.hauto {
+  height: auto;
+}
+
+.tp5 {
+  margin-top: 5px;
+}
+
+.hideoverflow {
+  overflow: hidden;
+}
+
+.top {
+  margin-bottom: 0px;
+}
+
+.bottom {
+  margin-top: auto;
+}
+
+.nomargin {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.f-right {
+  margin-left: auto;
+}
+
+.t-small {
+  font-size: small;
+}
+
+.center-horizontal {
+  margin-inline: auto;
+}
+
+.center-vertical {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.center-items {
+  text-align: center;
 }
 
 .imagePreview {
-  height: 300px;
-  width: 240px;
+  max-height: 300px;
+  height: auto;
+}
+
+.post {
+  border-radius: 1px;
+  border-color: black;
+  border-style: dotted;
+  border-width: 1px;
+  box-sizing: border-box;
+}
+
+.foot {
+  border-radius: 1px;
+  border-color: black;
+  border-style: dotted hidden hidden hidden;
+  border-width: 1px;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.head {
+  border-radius: 1px;
+  border-color: black;
+  border-style: hidden hidden dotted hidden;
+  border-width: 1px;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-items: center;
+  justify-content: center;
+  max-height: 25px;
+  box-sizing: border-box;
+}
+
+.users {
+  border-radius: 1px;
+  border-color: blue;
+  border-style: dotted;
+  border-width: 1px;
+  box-sizing: border-box;
+}
+
+.notice {
+  color: green;
+}
+
+.alert {
+  color: red;
+}
+
+#flash {
+  max-height: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+#flash div {
+  animation: appear-then-fade 4s both;
+}
+
+@keyframes appear-then-fade {
+  0%, 100% {
+    opacity:0
+  }
+  5%, 60% {
+    opacity:1
+  }
 }

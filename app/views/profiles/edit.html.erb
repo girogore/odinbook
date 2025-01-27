@@ -1,18 +1,18 @@
-<%= form_for @profile do |f| %>
-  <div class="table-maker">
-    <div class="row">
-      <div>
+<%= form_for [@user, @profile], as: :profile do |f| %>
+  <div class="col">
+    <div class="row g20">
+      <div class="w240f">
         <h4> Old Image: </h4>
       </div>
-      <div>
+      <div class="w240f">
         <h4> NewImage: </h4>
       </div>
     </div>
-    <div class="row">
-      <div>
+    <div class="row g20">
+      <div class="w240f">
         <%= image_tag @profile.profile_photo, class: "profilePicture"%>
       </div>
-      <div>
+      <div class="w240f">
         <%= image_tag @profile.profile_photo, class: "imagePreview" %>
       </div>
     </div>
@@ -22,6 +22,7 @@
       <%= f.label :image %>
     </div>
     <div>
+      <%= f.hidden_field :image, value: @profile.cached_image_data, id: nil %>
       <%= f.file_field :image, class: "imageInput"%>
     </div>
   </div>

@@ -1,1 +1,17 @@
-Hello!
+
+
+<% content_for :title, "Front Page" %>
+
+<h1>Posts</h1>
+
+<h4> Create New Post </h4>
+<%= turbo_frame_tag "new_post", src: new_post_path %>
+
+<h2> Feed </h2>
+<div id="posts" class="col g10 center">
+  <% @posts.each do |post| %>
+    <%= render post %>
+  <% end %>
+</div>
+
+<script type="text/javascript" src="/javascript/lib/turbo_image_preview.js"></script>

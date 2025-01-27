@@ -18,7 +18,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_param)
     if @profile.save
-      redirect_to @profile, notice: "Profile was successfully created."
+      redirect_to [ @user, @profile ], notice: "Profile was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,11 +27,11 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   def update
     if params[:profile].nil?
-      redirect_to @profile, notice: "No changes performed."
+      redirect_to [ @user, @profile ], notice: "No changes performed."
     else
       if @profile.update(profile_param)
         @profile.image_derivatives!
-        redirect_to @profile, notice: "Profile was successfully updated."
+        redirect_to [ @user, @profile ], notice: "Profile picture was successfully updated."
       else
         Shrine.plugin :remove_invalid
         flash.now[:alert] = "Image wrong type or too big"
@@ -47,15 +47,7 @@ class ProfilesController < ApplicationController
   end
 
   def verify_user
-    current_profile = Profile.find(params.expect(:id))
-    if user_signed_in?
-      if current_user.id == current_profile.user_id
-        @profile = current_profile
-      else
-        redirect_to "/profiles/#{current_user.profile.id}"
-      end
-    else
-      redirect_to root
-    end
+    @user = User.find(params.expect(:user_id))
+    @profile = User.find(params.expect(:user_id)).profile
   end
 end

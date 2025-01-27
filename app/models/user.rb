@@ -10,5 +10,9 @@ class User < ApplicationRecord
 
   has_many :following, dependent: :destroy
   has_many :followed_users, through: :following
-  has_many :requested_followers, class_name: :Following, foreign_key: :followed_users_id
+  has_many :follow_requests, class_name: :Following, foreign_key: :followed_users_id
+
+  def profile_picture_tiny
+    profile.profile_photo_tiny
+  end
 end

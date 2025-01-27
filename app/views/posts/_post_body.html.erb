@@ -1,0 +1,6 @@
+  <% if !post.body.nil? && !post.body.empty? %>
+    <div> <%= post.body %> </div>
+  <% end %>
+  <% if !post.image_data.nil? && !post.image_data.empty? %>
+    <%= image_tag post.resized_image %>
+  <% end %>

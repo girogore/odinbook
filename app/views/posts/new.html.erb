@@ -1,0 +1,23 @@
+<%= turbo_frame_tag "new_post", loading: "lazy" do %>
+  <%= form_with model: @post, data: { controller: :form } do |form| %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.label :body %>
+    <%= form.text_area :body, class: "post_text" %>
+    <div class="col">
+      <div class="row">
+        <div class="w240f h300m">
+          <div>
+            <%= image_tag "empty-photo.png", class: "imagePreview" %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <%= form.hidden_field :image, value: @post.cached_image_data, id: nil %>
+        <%= form.file_field :image, class: "imageInput"%>
+        <button type="button" class="clear">Remove Image</button>
+        <%= form.submit "Create Post", class: "submit" %>
+      </div>
+    </div>
+  <% end %>
+  
+<% end %>

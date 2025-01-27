@@ -1,0 +1,34 @@
+<div class="row g2">
+  <div class="post col w120f p20 t-small g5 w100max ">
+    <div class="h80 center-horizontal tp5">
+      <%= image_tag post.user.profile_picture_tiny %>
+    </div>
+    <div>
+       <a href='/users/<%="#{post.user.id}"%>/profile'> <%="#{post.email}" %></a>
+    </div>
+    <div>
+       <%= "Posts: #{post.user.posts.length}" %>
+    </div>
+  </div>
+  <div class="post col w85p p20">
+    <div class="top">
+      <div class="head t-small">
+        <%= "#{post.created_at.localtime.to_fs(:long_ordinal)}" %>
+      </div>
+    </div>
+    <div class="hauto hmin50 nomargin">
+      <%= render partial: "post_body", locals: { post: post } %>
+    </div>
+    <div class = "h25 bottom">
+      <div class = "foot row h25">
+        Like!
+        Comment
+        <div class = "f-right">
+        <% if current_user.id == post.user.id %>
+          <%= button_to "Delete this post", post, method: :delete %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,7 +23,7 @@ class Profile < ApplicationRecord
     if self.image
       self.image(:tiny).url ? self.image(:tiny).url : self.image.url
     else
-      "default-50x40.jpg"
+      "default-80x64.jpg"
     end
   end
 end

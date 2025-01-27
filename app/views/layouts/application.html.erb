@@ -26,17 +26,19 @@
 
   <body>
     <nav id="nav">
-      <div class="nav_buttons">
+      <div class="nav_buttons row g5">
         <% if user_signed_in? %>
-          <%= button_to "My Posts", "/posts/index", method: :get %>
+          <%= button_to "Front Page", "/posts", method: :get %>
           <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-          <%= button_to "My Profile", "/profiles/#{current_user.profile.id}" , method: :get %>
+          <%= button_to "My Profile", "/users/#{current_user.id}/profile" , method: :get %>
+          <%= button_to "All Users", "/users", method: :get %>
           <%= "Hello #{current_user.email}" %>
         <% end %>
       </div>
     </nav>
-    <p class="alert"><%= alert %></p>
-    <p class="notice"><%= notice %></p>
+    <div id="flash" class="flash">
+      <%= render "layouts/flash" %>
+    </div>
     <%= yield %>
   </body>
 </html>

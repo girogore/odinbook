@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_24_191832) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_25_215147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -33,10 +33,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_24_191832) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "type"
-    t.integer "likes"
-    t.bigint "user_id"
-    t.jsonb "content", null: false
+    t.bigint "user_id", null: false
+    t.string "body"
+    t.jsonb "image_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -64,4 +63,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_24_191832) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "posts", "users"
 end

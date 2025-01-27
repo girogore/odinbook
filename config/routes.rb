@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
+  resources :users do
+    resource :profile, except: [ :destroy ]
+  end
+  resolve("Profile") { [ :profile ] }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   root to: "posts#index"
-  resources :profiles, except: [ :destroy, :index ]
+  resources :posts, except: [ :edit ]
+  post "/followings", to: "followings#create"
+  patch "/followings", to: "followings#update"
 
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

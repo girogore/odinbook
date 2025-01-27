@@ -1,0 +1,6 @@
+<h1> User List: </h1>
+<div class="col">
+  <% @users.each do |user| %>
+    <%= render partial: "user", locals: { user: user, follow: @follow, follow_request: @follow_request } %>
+  <% end %>
+</div>

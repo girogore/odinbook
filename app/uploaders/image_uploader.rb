@@ -2,7 +2,7 @@ class ImageUploader < Shrine
   # plugins and uploading logic
   ALLOWED_TYPES  = %w[image/jpeg image/png]
   MAX_SIZE       = 10*1024*1024 # 10 MB
-  MAX_DIMENSIONS = [ 1024, 1024 ]
+  MAX_DIMENSIONS = [ 4000, 4000 ]
 
   plugin :remove_attachment
   plugin :pretty_location
@@ -30,8 +30,9 @@ class ImageUploader < Shrine
   Attacher.derivatives do |original|
     magick = ImageProcessing::MiniMagick.source(original)
     {
-      tiny: magick.resize_to_fit!(50, 40),
-      small:  magick.resize_to_fit!(300, 240)
+      tiny: magick.resize_to_fit!(80, 64),
+      small:  magick.resize_to_fit!(300, 240),
+      post: magick.resize_to_limit!(500, 500)
     }
   end
 end
