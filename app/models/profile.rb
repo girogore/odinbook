@@ -15,15 +15,15 @@ class Profile < ApplicationRecord
     if self.image
       self.image(:small).url ? self.image(:small).url : self.image.url
     else
-      "default-300x240.jpg"
+      "default-240x300.jpg"
     end
   end
 
   def profile_photo_tiny
-    if self.image
+    if self.image(:tiny)
       self.image(:tiny).url ? self.image(:tiny).url : self.image.url
     else
-      "default-80x64.jpg"
+      "default-64x80.jpg"
     end
   end
 end

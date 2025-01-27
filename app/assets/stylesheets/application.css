@@ -63,6 +63,10 @@
   flex: 0 0 80px;
 }
 
+.w100f {
+  flex: 0 0 100px;
+}
+
 .w100max{
   width: 100px;
   max-width: 100px;
@@ -71,6 +75,10 @@
 
 .w120f {
   flex: 0 0 120px;
+}
+
+.w150f {
+  flex: 0 0 150px;
 }
 
 .w60p {
@@ -145,6 +153,10 @@
   margin-left: auto;
 }
 
+.f-left {
+  margin-right: auto;
+}
+
 .t-small {
   font-size: small;
 }
@@ -160,6 +172,7 @@
 
 .center-items {
   text-align: center;
+  align-content: center;
 }
 
 .imagePreview {
@@ -214,6 +227,14 @@
 
 .alert {
   color: red;
+}
+
+.reject_button input{
+  background-color: red;
+}
+
+.approve_button input{
+  background-color: green;
 }
 
 #flash {

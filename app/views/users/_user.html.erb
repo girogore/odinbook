@@ -2,10 +2,11 @@
   <div class="h100 w120f tp5 h100 center-items">
       <%= image_tag user.profile_picture_tiny %>
   </div>
-  <div class="w60p hideoverflow center-vertical">
+  <div class="w60p hideoverflow center-vertical col">
     <a href='/users/<%="#{user.id}"%>/profile'> <%="#{user.email}" %></a>
+    <p> Posts: <%= "#{user.posts.length}" %> </p>
   </div>
-  <div class="row f-right w100f g20">
+  <div class="row f-right w150f g20 center-vertical center-items">
     <%= render partial: "following", locals: { user: user, follow: follow, follow_request: follow_request } %>
   </div>
 </div>

@@ -13,7 +13,7 @@ class ImageUploader < Shrine
   plugin :determine_mime_type, analyzer: :mime_types
 
   Attacher.default_url do
-    "default-300x240.jpg"
+    "default-240x300.jpg"
   end
 
   p Attacher.default_url
@@ -30,8 +30,8 @@ class ImageUploader < Shrine
   Attacher.derivatives do |original|
     magick = ImageProcessing::MiniMagick.source(original)
     {
-      tiny: magick.resize_to_fit!(80, 64),
-      small:  magick.resize_to_fit!(300, 240),
+      tiny: magick.resize_to_fit!(64, 80),
+      small:  magick.resize_to_fit!(240, 300),
       post: magick.resize_to_limit!(500, 500)
     }
   end

@@ -2,25 +2,31 @@ class FollowingsController < ApplicationController
   # POST /followings
   def create
     @following = Following.new(following_param)
-    if @following.save
-      redirect_to "/users"
-    else
-      redirect_to "/users", alert: "Unable to follow."
+    begin
+      if @following.save
+        redirect_to "/users"
+      else
+        redirect_to "/users", alert: "Unable to follow."
+      end
+    rescue ActiveRecord::RecordNotUnique
+      redirect_to "/users", alert: "You are already following that person"
     end
   end
 
   # PATCH/PUT /followings
   def update
-    if params[:profile].nil?
-      redirect_to [ @user, @profile ], notice: "No changes performed."
-    else
-      if @profile.update(profile_param)
-        @profile.image_derivatives!
-        redirect_to [ @user, @profile ], notice: "Profile picture was successfully updated."
+    @following = User.find(params[:following][:followed_users_id]).follow_requests.find_by(user_id: params[:following][:user_id])
+    if params[:commit] == "Reject"
+      if @following.update(following_param.merge({ status: "rejected" }))
+        redirect_to "/users"
       else
-        Shrine.plugin :remove_invalid
-        flash.now[:alert] = "Image wrong type or too big"
-        render :edit, status: :unprocessable_entity
+        redirect_to "/users", alert: "Something went wrong."
+      end
+    elsif params[:commit] == "Allow"
+      if @following.update(following_param.merge({ status: "approved" }))
+        redirect_to "/users"
+      else
+        redirect_to "/users", alert: "Something went wrong."
       end
     end
   end

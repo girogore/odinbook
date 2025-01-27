@@ -1,8 +1,39 @@
 <!-- # "requested, approved, rejected" -->
-<%= form_with url: "/followings", scope: :following, as: :following do |f| %>
-  <%= f.hidden_field :status, value: "requested", id: nil %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.hidden_field :followed_users_id, value: user.id %>
-  <%= f.submit "Follow" %>
+<% if current_user.id != user.id %>
+  <div>
+    <%= form_with url: "/followings", scope: :following, as: :following, method: "patch" do |f| %>
+      <%= f.hidden_field :user_id, value: user.id %>
+      <%= f.hidden_field :followed_users_id, value: current_user.id %>
+      <% current_status = current_user.follow_status_reverse(user.id) %>
+      <% if current_status == "requested" %>
+        <div class="col g20">
+          <div class="approve_button">
+            <%= f.submit "Allow", class: "follow_button"%>
+          </div>
+          <div class="reject_button">
+            <%= f.submit "Reject", class: "follow_button" %>
+          </div>
+        </div>
+      <% elsif current_status == "approved" %>
+        <div style = "color: green">Follower</div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="center-items f-right">
+    <%= form_with url: "/followings", scope: :following, as: :following do |f| %>
+      <%= f.hidden_field :status, value: "requested", id: nil %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :followed_users_id, value: user.id %>
+      <% current_status = current_user.follow_status(user.id) %>
+      <% if current_status.nil? %>
+        <%= f.submit "Follow", class: "follow_button" %>
+      <% elsif current_status == "requested" || current_status == "rejected" %>
+        <div style = "color: orange">Request Sent</div>
+      <% elsif current_status == "approved" %>
+        <div style = "color: green">Following</div>
+      <% else %>
+        <%= f.submit "Follow", class: "follow_button" %>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
-
