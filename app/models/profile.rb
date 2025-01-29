@@ -1,5 +1,5 @@
 class Profile < ApplicationRecord
-  include ImageUploader::Attachment(:image)
+  include ImageHaver
   before_save :image_resize
   belongs_to :user
 

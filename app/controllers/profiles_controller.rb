@@ -48,6 +48,6 @@ class ProfilesController < ApplicationController
 
   def verify_user
     @user = User.find(params.expect(:user_id))
-    @profile = User.find(params.expect(:user_id)).profile
+    @profile = @user.profile
   end
 end

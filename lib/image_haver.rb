@@ -1,9 +1,5 @@
-class Comment < ApplicationRecord
-  belongs_to :user
-  belongs_to :post
-  include ImageHaver
-  before_save :image_resize
-  delegate :email, to: :user
+module ImageHaver
+  include ImageUploader::Attachment(:image)
 
   def image_resize
     if self.image

@@ -4,7 +4,13 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = current_user.posts
+    current_user.following.each do |following|
+      if following.status == "approved"
+        @posts += (User.find(following.followed_users_id.to_i).posts)
+      end
+    end
+    @posts = @posts.sort_by { |post| post.created_at }
   end
 
   # GET /posts/1 or /posts/1.json
@@ -14,6 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @is_comment = false
   end
 
   # POST /posts or /posts.json

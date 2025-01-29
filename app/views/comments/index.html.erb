@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "comments_#{params[:post_id]}" do %>
+  <% if @comments %>
+    <% @comments.each do |comment| %>
+          <%= render partial: "posts/post", locals: {post: comment, is_comment: true} %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= turbo_stream.prepend "flash", partial: "layouts/flash" %>

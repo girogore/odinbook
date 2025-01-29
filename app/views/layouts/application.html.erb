@@ -28,11 +28,16 @@
     <nav id="nav">
       <div class="nav_buttons row g5">
         <% if user_signed_in? %>
-          <%= button_to "Front Page", "/posts", method: :get %>
-          <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-          <%= button_to "My Profile", "/users/#{current_user.id}/profile" , method: :get %>
-          <%= button_to "All Users", "/users", method: :get %>
-          <%= "Hello #{current_user.email}" %>
+          <div class="col">
+            <div class="row g20">
+              <%= button_to "Front Page", "/posts", method: :get %>
+              <%= button_to "All Users", "/users", method: :get %>
+            </div>
+            <div class="row g20">
+              <%= button_to "My Profile", "/users/#{current_user.id}/profile" , method: :get %>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+              <%= "Hello #{current_user.email}" %>
+            </div>
         <% end %>
       </div>
     </nav>

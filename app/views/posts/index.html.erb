@@ -1,17 +1,14 @@
 
 
 <% content_for :title, "Front Page" %>
-
-<h1>Posts</h1>
-
-<h4> Create New Post </h4>
 <%= turbo_frame_tag "new_post", src: new_post_path %>
 
-<h2> Feed </h2>
+<h1> Your Timeline </h1>
 <div id="posts" class="col g10 center">
   <% @posts.each do |post| %>
-    <%= render post %>
+    <%= render partial: "posts/post", locals: {post: post, is_comment: false} %>
   <% end %>
 </div>
 
 <script type="text/javascript" src="/javascript/lib/turbo_image_preview.js"></script>
+<script type="text/javascript" src="/javascript/lib/show_comment_button.js"></script>

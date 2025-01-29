@@ -17,18 +17,31 @@
       </div>
     </div>
     <div class="hauto hmin50 nomargin">
-      <%= render partial: "post_body", locals: { post: post } %>
+      <%= render partial: "posts/post_body", locals: { post: post } %>
     </div>
     <div class = "h25 bottom">
       <div class = "foot row h25">
-        Like!
-        Comment
-        <div class = "f-right">
-        <% if current_user.id == post.user.id %>
-          <%= button_to "Delete this post", post, method: :delete %>
+        <%= render partial: "posts/like_footer", locals: { post: post } %>
+        <% if !is_comment %>
+          <%= render partial: "posts/comment_footer", locals: { post: post } %>
         <% end %>
+        <div class = "f-right">
+          <% if current_user.id == post.user.id %>
+            <% if is_comment %>
+              <%= button_to "Delete this post", post_comment_path(id: post.id), method: :delete %>
+            <% else %>
+              <%= button_to "Delete this post", post, method: :delete %>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
+<% if !is_comment %>
+  <div class = "m100">
+    <%= turbo_frame_tag "comments_#{post.id}_new", src: new_post_comment_path(post_id: post.id)%>
+    <%= turbo_frame_tag "comments_#{post.id}", src: post_comments_path(post_id: post.id)%>
+    <div id="comments_<%="#{post.id}"%>" class="col g10 center"></div>
+  </div>
+<% end %>

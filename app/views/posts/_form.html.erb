@@ -1,17 +1,44 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<% if @is_comment %>
+  <% frame_tag = "comments_#{params[:post_id]}_new"%>
+  <% header_text = "Create New Comment" %>
+  <% submit_text = "Create Comment" %>
+  <% path = post_comments_path(post_id: params[:post_id]) %>
+  <% scope = "comment" %>
+<% else %>
+  <% frame_tag = "new_post"%>
+  <% header_text = "Create New Post" %>
+  <% submit_text = "Create Post" %>
+  <% path = posts_path %>
+  <% scope = "post" %>
+<% end %>
+<%= turbo_frame_tag frame_tag, loading: "lazy" do %>
+  <div class="h4"> <%= header_text %></div>
+  <%= form_with url: path, scope: scope, data: { controller: :form } do |form| %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.text_area :body, rows: 3, cols: 50, class: "post_text" %>
+    <div class="col">
+      <div class="row">
+        <div class="w240f h300m">
+          <div>
+            <% if @is_comment %>
+              <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_comments_#{params[:post_id]}" %>
+            <% else %>
+              <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_new_post" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <%= form.hidden_field :image, value: post.cached_image_data, id: nil %>
+        <% if @is_comment %>
+          <%= form.file_field :image, class:"imageInput", id: "imageInput_comments_#{params[:post_id]}"%>
+          <button type="button" class="clear" id=<%="clearPreview_comments_#{params[:post_id]}"%>>Remove Image</button>
+        <% else %>
+          <%= form.file_field :image, class:"imageInput", id: "imageInput_new_post"%>
+          <button type="button" class="clear" id=<%="clearPreview_new_post"%>>Remove Image</button>
+        <% end %> 
+        <%= form.submit submit_text, class: "submit" %>
+      </div>
     </div>
   <% end %>
-
-  <div>
-    <%= form.submit "Update Post"%>
-  </div>
 <% end %>

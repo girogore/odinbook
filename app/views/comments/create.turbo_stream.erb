@@ -1,0 +1,5 @@
+<% if @comment.id %>
+  <%= turbo_stream.append "comments_#{params[:post_id]}", partial: "posts/post", locals: {post: @comment, is_comment: true} %>
+<% end %>
+
+<%= turbo_stream.prepend "flash", partial: "layouts/flash" %>

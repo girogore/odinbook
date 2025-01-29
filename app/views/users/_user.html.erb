@@ -7,6 +7,6 @@
     <p> Posts: <%= "#{user.posts.length}" %> </p>
   </div>
   <div class="row f-right w150f g20 center-vertical center-items">
-    <%= render partial: "following", locals: { user: user, follow: follow, follow_request: follow_request } %>
+    <%= render partial: "users/following", locals: { user: user, follow: follow, follow_request: follow_request } %>
   </div>
 </div>

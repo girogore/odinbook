@@ -19,11 +19,12 @@
   </div>
 <% end %>
 
-<div class="col">
+<div class="col g10 center">
   <h2> <%="#{@profile.email}'s Posts" %> </h2>
-  <% current_user.posts.each_with_index do |post, idx| %>
-    <%= "#{idx}" %>
+  <% @profile.user.posts.sort_by { |post| post.created_at }.each_with_index do |post, idx| %>
+    <%= render partial: "posts/post", locals: {post: post, is_comment: false} %>
   <% end %>
 </div>
 
+<script type="text/javascript" src="/javascript/lib/show_comment_button.js"></script>
   

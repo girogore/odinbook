@@ -1,18 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
-  include ImageUploader::Attachment(:image)
+  has_many :comments
+  include ImageHaver
   before_save :image_resize
   delegate :email, to: :user
-
-  def image_resize
-    if self.image
-      self.image_derivatives!
-    end
-  end
-
-  def resized_image
-    if self.image
-      self.image(:small).url ? self.image(:small).url : self.image.url
-    end
-  end
+  scope :date_sorted, -> { order("created_at DESC") }
 end

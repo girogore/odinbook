@@ -17,6 +17,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_25_215147) do
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
+    t.string "body"
+    t.jsonb "image_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
