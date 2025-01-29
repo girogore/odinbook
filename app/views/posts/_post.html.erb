@@ -41,6 +41,5 @@
 <% if !is_comment %>
   <div class = "m100">
     <%= turbo_frame_tag "comments_#{post.id}" %>
-    <div id="comments_<%="#{post.id}"%>" class="col g10 center"></div>
   </div>
 <% end %>
