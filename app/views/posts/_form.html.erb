@@ -1,4 +1,4 @@
-<% if @is_comment %>
+<% if is_comment %>
   <% frame_tag = "comments_#{params[:post_id]}_new"%>
   <% header_text = "Create New Comment" %>
   <% submit_text = "Create Comment" %>
@@ -20,7 +20,7 @@
       <div class="row">
         <div class="w240f h300m">
           <div>
-            <% if @is_comment %>
+            <% if is_comment %>
               <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_comments_#{params[:post_id]}" %>
             <% else %>
               <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_new_post" %>
@@ -30,7 +30,7 @@
       </div>
       <div class="row">
         <%= form.hidden_field :image, value: post.cached_image_data, id: nil %>
-        <% if @is_comment %>
+        <% if is_comment %>
           <%= form.file_field :image, class:"imageInput", id: "imageInput_comments_#{params[:post_id]}"%>
           <button type="button" class="clear" id=<%="clearPreview_comments_#{params[:post_id]}"%>>Remove Image</button>
         <% else %>

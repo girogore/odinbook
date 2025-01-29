@@ -1,7 +1,8 @@
 <%= turbo_frame_tag "comments_#{params[:post_id]}" do %>
+  <%= render partial: "posts/form", locals: {post: Comment.new, is_comment: true} %>
   <% if @comments %>
     <% @comments.each do |comment| %>
-          <%= render partial: "posts/post", locals: {post: comment, is_comment: true} %>
+      <%= render partial: "posts/post", locals: {post: comment, is_comment: true} %>
     <% end %>
   <% end %>
 <% end %>

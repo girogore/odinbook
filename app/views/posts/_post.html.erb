@@ -40,8 +40,7 @@
 </div>
 <% if !is_comment %>
   <div class = "m100">
-    <%= turbo_frame_tag "comments_#{post.id}_new", src: new_post_comment_path(post_id: post.id)%>
-    <%= turbo_frame_tag "comments_#{post.id}", src: post_comments_path(post_id: post.id)%>
+    <%= turbo_frame_tag "comments_#{post.id}" %>
     <div id="comments_<%="#{post.id}"%>" class="col g10 center"></div>
   </div>
 <% end %>
