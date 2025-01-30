@@ -4,16 +4,18 @@
   <% submit_text = "Create Comment" %>
   <% path = post_comments_path(post_id: params[:post_id]) %>
   <% scope = "comment" %>
+  <% id = "create_form_#{params[:post_id]}" %>
 <% else %>
   <% frame_tag = "new_post"%>
   <% header_text = "Create New Post" %>
   <% submit_text = "Create Post" %>
   <% path = posts_path %>
   <% scope = "post" %>
+  <% id = "create_form_new_post" %>
 <% end %>
 <%= turbo_frame_tag frame_tag, loading: "lazy" do %>
   <div class="h4"> <%= header_text %></div>
-  <%= form_with url: path, scope: scope, data: { controller: :form } do |form| %>
+    <%= form_with url: path, scope: scope, id: id, data: { controller: :preview, action: "turbo:submit-end->preview#clear"} do |form| %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <%= form.text_area :body, rows: 3, cols: 50, class: "post_text" %>
     <div class="col">
@@ -21,22 +23,17 @@
         <div class="w240f h300m">
           <div>
             <% if is_comment %>
-              <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_comments_#{params[:post_id]}" %>
+              <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_comments_#{params[:post_id]}", data: {"preview-target"=>"imagePreview"} %>
             <% else %>
-              <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_new_post" %>
+              <%= image_tag "empty-photo.png", class:"imagePreview", id: "imagePreview_new_post", data: {"preview-target"=>"imagePreview"}  %>
             <% end %>
           </div>
         </div>
       </div>
       <div class="row">
         <%= form.hidden_field :image, value: post.cached_image_data, id: nil %>
-        <% if is_comment %>
-          <%= form.file_field :image, class:"imageInput", id: "imageInput_comments_#{params[:post_id]}"%>
-          <button type="button" class="clear" id=<%="clearPreview_comments_#{params[:post_id]}"%>>Remove Image</button>
-        <% else %>
-          <%= form.file_field :image, class:"imageInput", id: "imageInput_new_post"%>
-          <button type="button" class="clear" id=<%="clearPreview_new_post"%>>Remove Image</button>
-        <% end %> 
+        <%= form.file_field :image, class:"imageInput", id: "imageInput_comments_#{params[:post_id]}", data: {"preview-target"=>"imageInput", action:"change->preview#update"} %>
+        <button type="button" data-action="click->preview#clearImage" class="clear" id=<%="clearPreview_comments_#{params[:post_id]}"%>>Remove Image</button>
         <%= form.submit submit_text, class: "submit" %>
       </div>
     </div>

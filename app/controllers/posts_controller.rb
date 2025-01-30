@@ -42,8 +42,14 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy!
-    redirect_to posts_path, status: :see_other, notice: "Post was successfully destroyed."
+    respond_to do |format|
+      if @post.destroy
+        flash[:notice] = "Post was successfully destroyed."
+        format.turbo_stream
+      else
+        flash[:alert] = "Something prevented post from being deleted"
+      end
+    end
   end
 
   private

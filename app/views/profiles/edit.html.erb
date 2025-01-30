@@ -1,4 +1,4 @@
-<%= form_for [@user, @profile], as: :profile do |f| %>
+<%= form_for [@user, @profile], data: {controller: :preview}, as: :profile do |f| %>
   <div class="col">
     <div class="row g20">
       <div class="w240f">
@@ -13,7 +13,7 @@
         <%= image_tag @profile.profile_photo, class: "profilePicture"%>
       </div>
       <div class="w240f">
-        <%= image_tag @profile.profile_photo, class: "imagePreview" %>
+        <%= image_tag @profile.profile_photo, class: "imagePreview", data: {"preview-target"=>"imagePreview"} %>
       </div>
     </div>
   </div>
@@ -23,10 +23,8 @@
     </div>
     <div>
       <%= f.hidden_field :image, value: @profile.cached_image_data, id: nil %>
-      <%= f.file_field :image, class: "imageInput"%>
+      <%= f.file_field :image, class: "imageInput", data: {"preview-target"=>"imageInput", action:"change->preview#update"} %>
     </div>
   </div>
   <%= f.submit "Update Profile Image"%>
 <% end %>
-
-<script type="text/javascript" src="/javascript/lib/image_preview.js"></script>

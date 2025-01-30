@@ -1,0 +1,5 @@
+<% if @comment.id %>
+  <%= turbo_stream.remove "comment_#{@comment.id}" %>
+<% end %>
+
+<%= turbo_stream.prepend "flash", partial: "layouts/flash" %>

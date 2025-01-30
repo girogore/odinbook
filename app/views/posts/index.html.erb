@@ -1,5 +1,3 @@
-
-
 <% content_for :title, "Front Page" %>
 <%= turbo_frame_tag "new_post", src: new_post_path %>
 
@@ -9,6 +7,3 @@
     <%= render partial: "posts/post", locals: {post: post, is_comment: false} %>
   <% end %>
 </div>
-
-<script type="text/javascript" src="/javascript/lib/turbo_image_preview.js"></script>
-<script type="text/javascript" src="/javascript/lib/show_comment_button.js"></script>

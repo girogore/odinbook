@@ -1,1 +1,1 @@
-<%= link_to "Show Comments (#{post.comments.length})", "javascript:void(0)", id: "show_comment_#{post.id}", data: { turbo_frame: "comments_#{post.id}" } %>
+<%= link_to "Show Comments (#{post.comments.length})", "javascript:void(0)", id: "show_comment_#{post.id}", data: { turbo_frame: "comments_#{post.id}", controller: :comment, action: "click->comment#showAll" } %>

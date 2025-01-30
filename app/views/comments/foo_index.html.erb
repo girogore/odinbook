@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "comments_#{params[:post_id]}" do %>
-  <%= turbo_frame_tag "create_comment_#{params[:post_id]}" %>
-  <%= link_to "Create Comment", "javascript:void(0)", id: "create_comment_button_#{params[:post_id]}", data: { controller: :comment, turbo_frame: "create_comment_#{params[:post_id]}", action: "click->comment#newForm" } %>
+  <%= render partial: "posts/form", locals: {post: Comment.new, is_comment: true} %>
+  <%= link_to "Create Comment", "javascript:void(0)", id: "create_comment_#{post.id}", data: { turbo_frame: "create_comment_#{post.id}" } %>
   <% if @comments %>
     <% @comments.each do |comment| %>
       <%= render partial: "posts/post", locals: {post: comment, is_comment: true} %>

@@ -27,8 +27,14 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params.expect(:id))
-    @comment.destroy!
-    redirect_to "/", status: :see_other, notice: "Comment was successfully destroyed."
+    respond_to do |format|
+      if @comment.destroy!
+        flash[:notice] = "Comment successfully deleted"
+        format.turbo_stream
+      else
+        flash[:alert] = "Something prevented comment from being deleted"
+      end
+    end
   end
 
   private
