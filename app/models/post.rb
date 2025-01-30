@@ -8,4 +8,8 @@ class Post < ApplicationRecord
   delegate :email, to: :user
 
   scope :date_sorted, -> { order("created_at DESC") }
+
+  def is_liked?(user_id)
+    self.likes.exists?([ user_id: user_id ])
+  end
 end

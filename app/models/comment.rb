@@ -9,6 +9,10 @@ class Comment < ApplicationRecord
 
   delegate :email, to: :user
 
+  def is_liked?(user_id)
+    self.likes.exists?([ user_id: user_id ])
+  end
+
   def image_resize
     if self.image
       self.image_derivatives!

@@ -3,7 +3,7 @@
   <%= link_to "Create Comment", "javascript:void(0)", id: "create_comment_button_#{params[:post_id]}", data: { controller: :comment, turbo_frame: "create_comment_#{params[:post_id]}", action: "click->comment#newForm" } %>
   <% if @comments %>
     <% @comments.each do |comment| %>
-      <%= render partial: "posts/post", locals: {post: comment, is_comment: true} %>
+      <%= render partial: "posts/post", locals: {post: comment, is_comment: true, is_liked: comment.is_liked?(current_user.id)} %>
     <% end %>
   <% end %>
 <% end %>

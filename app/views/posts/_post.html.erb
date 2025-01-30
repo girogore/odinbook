@@ -24,8 +24,8 @@
       <%= render partial: "posts/post_body", locals: { post: post } %>
     </div>
     <div class = "h25 bottom">
-      <div class = "foot row h25">
-        <%= render partial: "posts/like_footer", locals: { post: post } %>
+      <div class = "foot row h25 g20">
+        <%= render partial: "posts/like_footer", locals: { post: post, is_comment: is_comment, is_liked: is_liked} %>
         <% if !is_comment %>
           <%= render partial: "posts/comment_footer", locals: { post: post } %>
         <% end %>

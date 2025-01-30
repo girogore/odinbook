@@ -1,5 +1,5 @@
 <% if @post.id %>
-  <%= turbo_stream.append "posts", partial: "posts/post", locals: {post: @post, is_comment: false} %>
+  <%= turbo_stream.append "posts", partial: "posts/post", locals: {post: @post, is_comment: false, is_liked: false} %>
 <% end %>
 
 <%= turbo_stream.prepend "flash", partial: "layouts/flash" %>

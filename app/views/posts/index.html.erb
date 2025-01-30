@@ -4,6 +4,6 @@
 <h1> Your Timeline </h1>
 <div id="posts" class="col g10 center">
   <% @posts.each do |post| %>
-    <%= render partial: "posts/post", locals: {post: post, is_comment: false} %>
+    <%= render partial: "posts/post", locals: {post: post, is_comment: false, is_liked: post.is_liked?(current_user.id)} %>
   <% end %>
 </div>

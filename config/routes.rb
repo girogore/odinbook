@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   post "/followings", to: "followings#create"
   patch "/followings", to: "followings#update"
 
-  resources :likes, only: [ :create, :new, :destroy ]
+  post "/likes", to: "likes#create"
+  delete "/likes", to: "likes#delete"
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

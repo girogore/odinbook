@@ -5,8 +5,6 @@ export default class extends Controller {
   static targets = ["imagePreview", "imageInput"]
 
   update() {    
-    console.log("*****");
-    
     let imageInput = this.imageInputTarget
     let imagePreview = this.imagePreviewTarget   
     if (imageInput.files) {

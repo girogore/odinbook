@@ -1,0 +1,20 @@
+<% if is_liked %>
+  <% method = :delete %>
+  <% submit_text = "Unlike!" %>
+<% else %>
+  <% method = :post %>
+  <% submit_text = "Like!" %>
+<% end %>
+<div class="row" data-controller="likes">
+  <%= form_with url: "/likes", scope: :like, as: :like, method: method, data: {action: "turbo:submit-end->likes#toggleLike", "likes-target"=>"likeForm"} do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <% if is_comment %>
+      <%= f.hidden_field :likeable_type, value: "Comment" %>
+    <% else %>
+      <%= f.hidden_field :likeable_type, value: "Post" %>
+    <% end %>
+    <%= f.hidden_field :likeable_id, value: post.id %>
+    <%= f.submit submit_text, class: "follow_button", data: {"likes-target"=>"likeButton"} %>
+  <% end %>
+  <div data-likes-target="likeText">Likes: <%= post.likes.length %></div>
+</div>
